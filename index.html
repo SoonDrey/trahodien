@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tra cứu dữ liệu JSON</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Hệ Thống Tra Cứu</a>
+                <a href="danhsach.html" class="btn btn-outline-light">
+                    <i class="bi bi-list"></i>
+                </a>
+            </div>
+        </nav>
+    <div class="container mt-4">
+        <h2 class="text-center">Tra cứu dữ liệu</h2>
+        <div class="position-relative">
+            <input type="text" id="search" class="form-control" placeholder="Nhập tên hoặc mã số điện...">
+            <div id="suggestions"></div>
+        </div>
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="idstt">STT</th>
+                        <th>Họ và Tên</th>
+                        <th>Tên khác</th>
+                        <th>Mã Số Điện</th>
+                        <th>Số điện thoại</th>
+                    </tr>
+                </thead>
+                <tbody id="data-table"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Thông báo sao chép -->
+    <div id="copy-alert" class="copy-alert"></div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            © 2024 Hệ Thống Tra Cứu | <a href="#">Chính sách bảo mật</a> | <a href="#">Liên hệ</a>
+        </footer>
+
+    <script src="js/data.js"></script>
+    <script>
+        function displayData(data) {
+    const tableBody = document.getElementById('data-table');
+    tableBody.innerHTML = "";
+    data.forEach((item, index) => {
+        const phoneNumber = item["Số điện thoại"] ? 
+            `${item["Số điện thoại"]}
+            <button class="copy-btn" onclick="copyToClipboard('${item["Số điện thoại"]}')">
+                <i class="bi bi-copy"></i>
+            </button>` : '-';
+
+        const row = `<tr>
+            <td>${index + 1}</td>
+            <td>${item["Họ và Tên"]}</td>
+            <td>${item["Tên khác"] || '-'}</td>
+            <td>
+                ${item["Mã Số Điện"]}
+                <button class="copy-btn" onclick="copyToClipboard('${item["Mã Số Điện"]}', true)">
+                    <i class="bi bi-copy"></i>
+                </button>
+            </td>
+            <td>${phoneNumber}</td>
+        </tr>`;
+        tableBody.innerHTML += row;
+    });
+}
+
+
+        function copyToClipboard(text, isElectricCode = false) {
+            let textToCopy = isElectricCode ? "pb050700" + text : text;
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showCopyAlert(`Đã sao chép: ${textToCopy}`);
+            }).catch(err => {
+                console.error("Lỗi khi sao chép: ", err);
+            });
+        }
+
+
+        function showCopyAlert(message) {
+            const alertBox = document.getElementById("copy-alert");
+            alertBox.innerText = message;
+            alertBox.style.display = "block";
+            setTimeout(() => {
+                alertBox.style.display = "none";
+            }, 2000);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            if (typeof jsonData !== 'undefined' && jsonData.data) {
+                displayData(jsonData.data);
+            } else {
+                console.error("Không thể tải dữ liệu JSON.");
+            }
+
+            const searchInput = document.getElementById('search');
+            const suggestions = document.getElementById('suggestions');
+
+            searchInput.addEventListener('input', function () {
+                const searchText = this.value.toLowerCase().trim();
+                const filteredData = jsonData.data.filter(item =>
+                    item["Họ và Tên"].toLowerCase().includes(searchText) ||
+                    (item["Tên khác"] || "").toLowerCase().includes(searchText) ||
+                    item["Mã Số Điện"].includes(searchText)
+                );
+
+                displayData(filteredData);
+
+                suggestions.innerHTML = "";
+                if (searchText) {
+                    suggestions.style.display = "block";
+                    filteredData.slice(0, 5).forEach(item => {
+                        const div = document.createElement("div");
+                        div.classList.add("suggestion-item");
+                        div.textContent = item["Họ và Tên"];
+                        div.addEventListener("click", function () {
+                            searchInput.value = item["Họ và Tên"];
+                            suggestions.style.display = "none";
+                            displayData([item]);
+                        });
+                        suggestions.appendChild(div);
+                    });
+                } else {
+                    suggestions.style.display = "none";
+                }
+            });
+
+            document.addEventListener("click", function (e) {
+                if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
+                    suggestions.style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

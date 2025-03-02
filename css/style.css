@@ -1,0 +1,150 @@
+body {
+    position: relative;
+}
+
+.alphabet-nav {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    padding-top: 20px;
+}
+
+.alphabet-nav a {
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    color: white;
+    background: #3c74ad;
+    margin: 3px 0;
+    text-align: center;
+    border-radius: 5px;
+    width: 30px;
+    font-weight: bold;
+}
+
+.alphabet-nav a:hover {
+    background: #2c547b;
+}
+
+.table-responsive {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.group-header {
+    background: #3c74ad;
+    color: white;
+    padding: 8px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.copy-btn {
+    background-color: #3c74ad;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.copy-btn:hover {
+    background-color: #3c74ad;
+}
+
+.copy-alert {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #3c74ad;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+}
+
+#suggestions {
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: none;
+}
+
+.suggestion-item {
+    cursor: pointer;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.suggestion-item:hover {
+    background: #f0f0f0;
+}
+
+.copy-btn {
+    background-color: #3c74ad;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.copy-btn:hover {
+    background-color: #3c74ad;
+}
+
+.copy-alert {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #3c74ad;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+}
+
+/* Định dạng bảng cuộn trên thiết bị nhỏ */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Định dạng input cho màn hình nhỏ */
+@media (max-width: 576px) {
+    .form-control {
+        font-size: 14px;
+    }
+
+    .copy-btn {
+        padding: 3px 6px;
+        font-size: 12px;
+    }
+}
+
+/* Footer */
+.footer {
+background-color: #3c74ad;
+color: white;
+text-align: center;
+padding: 10px;
+margin-top: 20px;
+font-size: 14px;
+}
+
+.footer a {
+color: #f8f9fa;
+text-decoration: none;
+}
+
+.footer a:hover {
+text-decoration: underline;
+}
