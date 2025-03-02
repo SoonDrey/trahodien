@@ -38,7 +38,9 @@
         </div>
     </div>
 
+    <button id="toggle-alphabet" class="toggle-btn">Ẩn Bảng Chữ Cái</button>
     <div class="alphabet-nav" id="alphabet-nav"></div>
+    
 
     <div id="copy-alert" class="copy-alert"></div>
 
@@ -127,6 +129,25 @@
                 console.error("Không thể tải dữ liệu JSON.");
             }
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+    const alphabetNav = document.getElementById("alphabet-nav");
+    const toggleBtn = document.getElementById("toggle-alphabet");
+
+    toggleBtn.addEventListener("click", function () {
+        if (alphabetNav.style.display === "none") {
+            alphabetNav.style.display = "block";
+            toggleBtn.innerText = "Ẩn Bảng Chữ Cái";
+        } else {
+            alphabetNav.style.display = "none";
+            toggleBtn.innerText = "Hiện Bảng Chữ Cái";
+        }
+    });
+
+    // Mặc định hiển thị thanh bảng chữ cái
+    alphabetNav.style.display = "block";
+});
+
     </script>
 </body>
 

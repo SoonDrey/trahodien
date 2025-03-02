@@ -56,6 +56,24 @@ body {
     background-color: #3c74ad;
 }
 
+.toggle-btn {
+    position: fixed;
+    right: 20px;
+    top: 10%;
+    background-color: #3c74ad;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.toggle-btn:hover {
+    background-color: #2c547b;
+}
+
+
 .copy-alert {
     position: fixed;
     top: 10px;
