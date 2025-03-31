@@ -142,7 +142,7 @@ const jsonData = {
     },
     {
         "STT": "21",
-        "Họ và Tên": "Vỏ Thanh Triêm",
+        "Họ và Tên": "Võ Thanh Triêm",
         "Tên khác": "",
         "Mã Số Điện": "15134",
         "Số điện thoại": ""
@@ -191,7 +191,7 @@ const jsonData = {
     },
     {
         "STT": "28",
-        "Họ và Tên": "Phạm Trung Thành",
+        "Họ và Tên": "Phan Trung Thành",
         "Tên khác": "Ân",
         "Mã Số Điện": "23760",
         "Số điện thoại": "0335199925"
